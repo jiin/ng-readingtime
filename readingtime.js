@@ -8,38 +8,47 @@ angular.module('ngReadingTime', [])
         textToRead: '=',
         wordsPerMinute: '@?'
       },
+      replace: true,
+      template: '<span>{{txt}}</span>',
       link: function(scope, element, attrs) {
 
-        var words = scope.textToRead.trim().split(/\s+/g).length,
-            wps   = (scope.wordsPerMinute || 210) / 60,
-            rts   = words / wps;
+        scope.$watch(function() {
+          return scope.textToRead;
+        }, function (text) {
 
-        var formats = {
-          text_only: function(time) {
-            var result = 'readable in ';
+          if (!text) text = '';
 
-            if (!time.minutes && !time.seconds)
-              result += 'a moment';
+          var words = text.trim().split(/\s+/g).length,
+              wps   = (scope.wordsPerMinute || 210) / 60,
+              rts   = words / wps;
 
-            if (time.minutes)
-              result += time.minutes + ' minutes ';
+          var formats = {
+            text_only: function(time) {
+              var result = 'readable in ';
 
-            if (time.seconds)
-              result += time.seconds + ' seconds';
+              if (!time.minutes && !time.seconds)
+                result += 'a moment';
 
-            return result;
-          }
-        };
+              if (time.minutes)
+                result += time.minutes + ' minutes ';
 
-        var m = Math.floor(rts / 60),
-            s = Math.round(rts - m * 60);
+              if (time.seconds)
+                result += time.seconds + ' seconds';
 
-        var out = formats.text_only.call(this, {
-          minutes: m,
-          seconds: s
+              return result;
+            }
+          };
+
+          var m = Math.floor(rts / 60),
+              s = Math.round(rts - m * 60);
+
+          var out = formats.text_only.call(this, {
+            minutes: m,
+            seconds: s
+          });
+
+          scope.txt = out;
         });
-
-        element.html(out);
       }
     }
   });

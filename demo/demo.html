@@ -7,21 +7,47 @@
       margin: 0;
       padding: 0;
     }
+
+    h2, textarea, p {
+      font-family: "Lucida Console", Monaco, monospace;
+      outline: none;
+    }
+
+    h2 {
+      color: #3498db;
+    }
+
+    div#container {
+      width: 400px;
+      margin: 50px auto;
+    }
+
+    textarea {
+      border: 1px solid #333;
+      min-height: 200px; 
+      width: 100%;
+      border: 2px solid #2980b9;
+      padding: 5px;
+    }
+
+    p#result {
+      color: #3498db;
+      font-size: 18px;
+      padding: 5px;
+    }
     </style>
   </head>
-  <body ng-controller="testCtrl" ng-init="calculate = false">
-    <textarea ng-model="text" style="height: 100px; width: 200px;"></textarea>
-    <button ng-click="calculate = true">Calculate</button>
-    <p ng-if="calculate">Page read time: <span ng-reading-time text-to-read="text"></span></p>
-
+  <body>
+    <div id="container">
+      <h2>Get your text reading time</h2>
+      <textarea ng-model="text"></textarea>
+      <p id="result">Page read time: <span ng-reading-time text-to-read="text"></span></p>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="../readingtime.js"></script>
     <script>
-    angular.module('testApp', ['ngReadingTime'])
-        .controller('testCtrl', ['$scope', function($scope) {
-          $scope.text = '';
-        }]);
+      angular.module('testApp', ['ngReadingTime']);
     </script>
   </body>
 </html>
