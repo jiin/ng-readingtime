@@ -1,0 +1,27 @@
+<!doctype html>
+<html ng-app="testApp">
+  <head>
+    <title>ng-readingtime demo</title>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    </style>
+  </head>
+  <body ng-controller="testCtrl" ng-init="calculate = false">
+    <textarea ng-model="text" style="height: 100px; width: 200px;"></textarea>
+    <button ng-click="calculate = true">Calculate</button>
+    <p ng-if="calculate">Page read time: <span ng-reading-time text-to-read="text"></span></p>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="../readingtime.js"></script>
+    <script>
+    angular.module('testApp', ['ngReadingTime'])
+        .controller('testCtrl', ['$scope', function($scope) {
+          $scope.text = '';
+        }]);
+    </script>
+  </body>
+</html>

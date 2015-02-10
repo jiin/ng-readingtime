@@ -1,0 +1,23 @@
+{
+  "name": "ng-readingtime",
+  "version": "0.0.1",
+  "homepage": "https://github.com/jiin/ng-readingtime",
+  "authors": [
+    "Jiin <neri.barnini@gmail.com>"
+  ],
+  "description": "angular directive to calculate text reading time",
+  "main": "readingtime",
+  "keywords": [
+    "reading",
+    "time",
+    "text",
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
