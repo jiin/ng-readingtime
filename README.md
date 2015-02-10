@@ -16,7 +16,7 @@ Include the readingtime.js script provided in bower_components and add `ngReadin
 Usage
 -------
 
-```
+```html
 <p>
   Reading time: <span ng-reading-time text-to-read="text"></span>
 </p>
