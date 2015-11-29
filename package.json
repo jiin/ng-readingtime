@@ -1,6 +1,6 @@
 {
   "name": "ng-readingtime",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "angular directive to calculate text reading time",
   "main": "readingtime.js",
   "devDependencies": {
