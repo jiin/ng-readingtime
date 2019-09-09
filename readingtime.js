@@ -8,16 +8,19 @@ angular.module('ngReadingTime', [])
       },
 
       text_only: function(time) {
-        var result = 'readable in ';
+        var result = (time.readableStr || 'readable in') + ' ';
 
         if (!time.minutes && !time.seconds)
-          result += 'a moment';
+          result += ' ' + (time.aMomentStr || 'a moment');
 
         if (time.minutes)
-          result += time.minutes + ' minutes ';
+          result += time.minutes + ' ' + (time.minutesStr || 'minutes ');
+
+        if (time.minutes && time.seconds)
+          result += ', '
 
         if (time.seconds)
-          result += time.seconds + ' seconds';
+          result += time.seconds + ' ' + (time.secondsStr || 'seconds');
 
         return result;
       }
@@ -37,6 +40,10 @@ angular.module('ngReadingTime', [])
             s = Math.round(rts - m * 60);
 
         var out = formats[format].call(this, {
+          aMomentStr: custom.aMomentStr,
+          readableStr: custom.readableStr,
+          minutesStr: custom.minutesStr,
+          secondsStr: custom.secondsStr,
           minutes: m,
           seconds: s
         });
@@ -51,6 +58,10 @@ angular.module('ngReadingTime', [])
       scope: {
         textToRead: '=',
         wordsPerMinute: '@?',
+        aMomentStr: '@?',
+        readableStr: '@?',
+        minutesStr: '@?',
+        secondsStr: '@?',
         format: '@?'
       },
       replace: true,
@@ -62,7 +73,11 @@ angular.module('ngReadingTime', [])
         }, function (text) {
           scope.txt = readingTime.get(text, {
             wordsPerMinute: scope.wordsPerMinute,
-            format: scope.format
+            format: scope.format,
+            aMomentStr: scope.aMomentStr,
+            readableStr: scope.readableStr,
+            minutesStr: scope.minutesStr,
+            secondsStr: scope.secondsStr
           });
         });
 
